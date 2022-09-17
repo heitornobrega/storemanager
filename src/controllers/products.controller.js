@@ -22,4 +22,15 @@ const getById = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById };
+const insert = async (req, res, next) => {
+  try {
+    const { name } = req.body;
+    console.log(name);
+    const result = await productsService.insert(name);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAll, getById, insert };
