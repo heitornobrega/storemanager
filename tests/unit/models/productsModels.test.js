@@ -20,7 +20,21 @@ describe('Testes de unidade do model de produtos', function () {
       sinon.stub(connection, "execute").resolves([productById]);
       const result = await productModel.getById(5000);
       expect(result).to.be.deep.equal(productById);
-
+    })
+  })
+  describe('Testes de unidade do endpoint POST /products', function () {
+    describe('Testes de unidade função insert', function () {
+          afterEach(function () {
+            sinon.restore();
+          });
+      it('Testes de unidade insert', async function () {
+      const name = 'nomeDoProduto'
+      const id = 45;
+      const response = { name: name, id: id };  
+      sinon.stub(connection, "execute").resolves([{insertId: 45}]);
+      const result = await productModel.insert(name);
+      expect(response).to.be.deep.equal({ name: name, id: result });
+      })
     })
   })
 })

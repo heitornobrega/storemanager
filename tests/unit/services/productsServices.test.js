@@ -42,4 +42,19 @@ describe("Testes de unidade para a cada service", function () {
     //   });
     // });
   });
+    describe("Testes de unidade do endpoint POST /products", function () {
+      describe("Testes de unidade função insert", function () {
+        afterEach(function () {
+          sinon.restore();
+        });
+        it("Testes de unidade insert", async function () {
+          const name = "nomeDoProduto";
+          const id = 45;
+          const response = { name: name, id: id };
+          sinon.stub(productModel, 'insert').resolves(45);
+          const result = await productsService.insert(name);
+          expect(result).to.be.deep.equal(response);
+        });
+      });
+    });
 });

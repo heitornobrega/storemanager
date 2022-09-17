@@ -1,5 +1,5 @@
 const { productModel } = require('../../models');
-const { idSchema } = require('./schemas');
+const { idSchema, name } = require('./schemas');
 
 const validateId = async (id) => {
   const { error } = idSchema.validate(id);
@@ -9,4 +9,10 @@ const validateId = async (id) => {
   return { type: null, message: '' };
 };
 
-module.exports = { validateId };
+const validateName = (nome) => {
+  const { error } = name.validate(nome);
+  if (error) return { type: 'INVALID_VALUE', message: error.message };
+  return { type: null, message: '' };
+};
+
+module.exports = { validateId, validateName };

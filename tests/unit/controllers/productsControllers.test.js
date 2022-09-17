@@ -92,7 +92,26 @@ describe("Teste de unidade da camada products controllers", function () {
       expect(res.json).to.have.been.calledWith({
         message: "Product not found",
       });
-    
+    });
+  });
+  describe("Testes de unidade do endpoint POST /products", function () {
+    describe("Testes de unidade função insert", function () {
+      afterEach(function () {
+        sinon.restore();
+      });
+      it("Testes de unidade insert", async function () {
+        const res = {};
+        const req = { body: { name: "nomeDoProduto" } };
+        res.json = sinon.stub().returns();
+        res.status = sinon.stub().returns(res);
+        const { name } = req.body;
+        const id = 45;
+        const response = { name: name, id: id };
+        sinon.stub(productsService, "insert").resolves({ name: name, id: id });
+        await productsController.insert(req, res);
+        expect(res.status).to.have.been.calledWith(201);
+        expect(res.json).to.have.been.calledWith(response);
+      });
     });
   });
 });
