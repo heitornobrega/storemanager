@@ -28,5 +28,10 @@ const insert = async (name) => {
   const result = await productModel.insert(name);
   return { id: result, name };
 };
+const deleteById = async (id) => {
+  const result = await productModel.deleteById(id);
+  if (!result) return { message: 'Product not found' };
+  return result;
+};
 
-module.exports = { getAll, getById, insert };
+module.exports = { getAll, getById, insert, deleteById };

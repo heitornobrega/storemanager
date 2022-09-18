@@ -10,4 +10,5 @@ const getById = async (id) => {
   if (result.length === 0) return { message: 'Sale not found' };
   return result;
 };
+
 module.exports = { getAll, getById };

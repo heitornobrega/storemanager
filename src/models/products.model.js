@@ -22,4 +22,13 @@ const insert = async (name) => {
   return insertId;
 };
 
-module.exports = { getAll, getById, insert };
+const deleteById = async (id) => {
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?',
+    [id],
+  );
+  console.log(affectedRows);
+  return affectedRows;
+};
+
+module.exports = { getAll, getById, insert, deleteById };

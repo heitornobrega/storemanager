@@ -32,4 +32,11 @@ const insert = async (req, res) => {
   // }
 };
 
-module.exports = { getAll, getById, insert };
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const result = await productsService.deleteById(id);
+  if (result.message) return res.status(404).json({ message: 'Product not found' });
+  return res.status(204).send();
+};
+
+module.exports = { getAll, getById, insert, deleteById };
