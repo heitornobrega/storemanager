@@ -31,4 +31,16 @@ const deleteById = async (id) => {
   return affectedRows;
 };
 
-module.exports = { getAll, getById, insert, deleteById };
+const findProducts = async (allInfo) => {
+  const result = allInfo.map(async ({ productId }) => {
+    const [resulta] = await connection.execute(
+      'SELECT * FROM StoreManager.products WHERE id = ?',
+      [productId],
+    );
+    return resulta;
+  });
+  const resultado = await Promise.all(result);
+  return resultado;
+};
+
+module.exports = { getAll, getById, insert, deleteById, findProducts };

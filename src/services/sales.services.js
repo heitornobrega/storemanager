@@ -1,4 +1,4 @@
-const { salesModel } = require('../models');
+const { salesModel, productModel } = require('../models');
 
 const getAll = async () => {
   const result = await salesModel.getAll();
@@ -11,4 +11,15 @@ const getById = async (id) => {
   return result;
 };
 
-module.exports = { getAll, getById };
+const insert = async (sale) => {
+  const productExist = await productModel.findProducts(sale);
+  const productNotFound = productExist.some((element) => element.length === 0);
+  if (productNotFound) return { message: 'Product not found' };
+  const saleId = await salesModel.insert(sale);
+  const allInfos = [...sale].map((element) => ({ saleId, ...element }));
+  await salesModel.insertProduct(allInfos);
+  const result = { id: saleId, itemsSold: sale };
+  return result;
+};
+
+module.exports = { getAll, getById, insert };

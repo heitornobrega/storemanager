@@ -6,10 +6,16 @@ const getAll = async (_req, res) => {
 };
 
 const getById = async (req, res) => {
-    const { id } = req.params;
-    const result = await salesServices.getById(id);
-    if (result.message) return res.status(404).json(result);
-    res.status(200).json(result);
+  const { id } = req.params;
+  const result = await salesServices.getById(id);
+  if (result.message) return res.status(404).json(result);
+  res.status(200).json(result);
 };
 
-module.exports = { getAll, getById };
+const insert = async (req, res) => {
+  const sale = req.body;
+  const result = await salesServices.insert(sale);
+  if (result.message) return res.status(404).json(result);
+  res.status(201).json(result);
+};
+module.exports = { getAll, getById, insert };

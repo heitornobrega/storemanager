@@ -69,7 +69,7 @@
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-09-17T22:41:52.502Z",
-    "modified": "2022-09-17T23:13:36.482Z",
+    "modified": "2022-09-18T21:01:58.399Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -86,6 +86,25 @@
     "modified": "2022-09-18T00:07:25.568Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "8e8ed0ed-cc01-4953-8425-a96b4c42972a",
+    "colId": "39b41452-2d1d-4655-a9a7-05e6b04790bf",
+    "containerId": "",
+    "name": "insere-venda",
+    "url": "http://localhost:3000/sales/",
+    "method": "POST",
+    "sortNum": 70000,
+    "created": "2022-09-18T20:55:32.680Z",
+    "modified": "2022-09-19T20:46:09.753Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\"productId\":1}]",
+      "form": []
+    },
     "tests": []
   }
 ]
