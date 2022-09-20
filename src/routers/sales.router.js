@@ -4,6 +4,7 @@ const { salesController } = require('../controllers');
 const quantityIsValid = require('../middlewares/quantityisValid');
 const productsAreValid = require('../middlewares/productsAreValid');
 const quantityIsPresent = require('../middlewares/quantityIsPresent');
+const productIsPresent = require('../middlewares/productIsPresent');
 
 const router = express.Router();
 
@@ -17,5 +18,13 @@ router.post(
   salesController.insert,
 );
 router.delete('/:id', salesController.deleteById);
+router.put(
+  '/:id',
+  productIsPresent,
+  productsAreValid,
+  quantityIsPresent,
+  quantityIsValid,
+  salesController.update,
+);
 
 module.exports = router;

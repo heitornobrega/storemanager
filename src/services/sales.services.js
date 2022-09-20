@@ -21,10 +21,24 @@ const insert = async (sale) => {
   const result = { id: saleId, itemsSold: sale };
   return result;
 };
+
 const deleteById = async (id) => {
   const result = await salesModel.deleteById(id);
   if (!result) return { message: 'Sale not found' };
   return result;
 };
 
-module.exports = { getAll, getById, insert, deleteById };
+const update = async (sale) => {
+  const productExist = await productModel.findProducts(sale.sale);
+  const productNotFound = productExist.some((element) => element.length === 0);
+  if (productNotFound) return { message: 'Product not found' };
+  const saleExist = await salesModel.findSells(sale);
+  const saleNotFound = saleExist.length === 0;
+  if (saleNotFound) return { message: 'Sale not found' };
+  await salesModel.update(sale);
+  // const allInfos = [...sale].map((element) => ({ saleId, ...element }));
+  // await salesModel.insertProduct(allInfos);
+  const result = 'OK';
+  return result;
+};
+module.exports = { getAll, getById, insert, deleteById, update };

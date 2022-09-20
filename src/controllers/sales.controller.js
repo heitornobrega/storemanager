@@ -24,4 +24,13 @@ const deleteById = async (req, res) => {
   if (result.message) { return res.status(404).json({ message: 'Sale not found' }); }
   return res.status(204).send();
 };
-module.exports = { getAll, getById, insert, deleteById };
+
+const update = async (req, res) => {
+  const { id } = req.params;
+  const sale = req.body;
+  const result = await salesServices.update({ id, sale });
+  if (result.message) { return res.status(404).json({ message: result.message }); }
+  return res.status(200).json({ saleId: id, itemsUpdated: sale });
+};
+
+module.exports = { getAll, getById, insert, deleteById, update };

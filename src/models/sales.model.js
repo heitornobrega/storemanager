@@ -66,4 +66,35 @@ const deleteById = async (id) => {
   console.log(affectedRows);
   return affectedRows;
 };
-module.exports = { getAll, getById, insert, insertProduct, deleteById };
+
+const findSells = async (allInfo) => {
+  const { id } = allInfo;
+    const [result] = await connection.execute(
+      'SELECT * FROM StoreManager.sales WHERE id = ?',
+      [id],
+    );
+  return result;
+};
+
+const update = async (allInfo) => {
+  const { id, sale } = allInfo;
+  const result = sale.map(async ({ productId, quantity }) => {
+    const [resulta] = await connection.execute(
+      'UPDATE StoreManager.sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
+      [quantity, id, productId],
+    );
+    return resulta;
+  });
+  const resultado = await Promise.all(result);
+  return resultado;
+};
+
+module.exports = {
+  getAll,
+  getById,
+  insert,
+  insertProduct,
+  deleteById,
+  update,
+  findSells,
+};
