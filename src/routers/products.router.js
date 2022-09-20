@@ -4,6 +4,7 @@ const nameIsValid = require('../middlewares/products/nameIsValid');
 
 const router = express.Router();
 
+router.get('/search?', productsController.getByName);
 router.get('/', productsController.getAll);
 router.get('/:id', productsController.getById);
 router.post('/', nameIsValid, productsController.insert);

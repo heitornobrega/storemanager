@@ -52,4 +52,20 @@ const update = async (info) => {
       return result;
 };
 
-module.exports = { getAll, getById, insert, deleteById, findProducts, update };
+const getByName = async (name) => {
+  const [result] = await connection.execute(
+    `SELECT * FROM StoreManager.products WHERE name LIKE '%${name}%'`,
+  );
+  console.log(result);
+  return result;
+};
+
+module.exports = {
+  getAll,
+  getById,
+  insert,
+  deleteById,
+  findProducts,
+  update,
+  getByName,
+};

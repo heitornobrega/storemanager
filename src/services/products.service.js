@@ -45,4 +45,10 @@ const update = async (info) => {
   return result;
 };
 
-module.exports = { getAll, getById, insert, deleteById, update };
+const getByName = async (name) => {
+  const result = await productModel.getByName(name);
+  if (result.length === 0) return { message: 'Product not found' };
+  return result;
+};
+
+module.exports = { getAll, getById, insert, deleteById, update, getByName };

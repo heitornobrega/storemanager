@@ -144,5 +144,25 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "1b0c29bb-ce40-4e26-955f-beff151fde56",
+    "colId": "39b41452-2d1d-4655-a9a7-05e6b04790bf",
+    "containerId": "",
+    "name": "lista-produto-por-nome",
+    "url": "http://localhost:3000/products/search?q=Linguiça",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2022-09-20T23:15:54.436Z",
+    "modified": "2022-09-20T23:31:03.663Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "Linguiça",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]
