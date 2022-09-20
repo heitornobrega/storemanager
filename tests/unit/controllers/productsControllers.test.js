@@ -114,4 +114,25 @@ describe("Teste de unidade da camada products controllers", function () {
       });
     });
   });
+  describe("Teste de unidade rota DELETE /products", function () {
+    describe("Testes de unidade função insert", function () {
+      afterEach(function () {
+        sinon.restore();
+      });
+      it("Testes de unidade insert", async function () {
+        const res = {};
+        const req = { params: { id: 45 } };
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon
+          .stub(productsService, "getById")
+          .resolves({ type: "ID_NOT_FOUND", message: "Product not found" });
+        await productsController.getById(req, res);
+        expect(res.status).to.have.been.calledWith(404);
+        expect(res.json).to.have.been.calledWith({
+          message: "Product not found",
+        });
+      });
+    });
+  });
 });

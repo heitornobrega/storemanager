@@ -28,10 +28,21 @@ const insert = async (name) => {
   const result = await productModel.insert(name);
   return { id: result, name };
 };
+
 const deleteById = async (id) => {
   const result = await productModel.deleteById(id);
   if (!result) return { message: 'Product not found' };
   return result;
 };
 
-module.exports = { getAll, getById, insert, deleteById };
+const update = async (info) => {
+  const { id } = info;
+  const productId = id;
+  const productExist = await productModel.findProducts([{ productId }]);
+  const productNotFound = productExist.some((element) => element.length === 0);
+  if (productNotFound) return { message: 'Product not found' };
+  const result = await productModel.update(info);
+  return result;
+};
+
+module.exports = { getAll, getById, insert, deleteById, update };
