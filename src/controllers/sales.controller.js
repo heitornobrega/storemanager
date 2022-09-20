@@ -18,4 +18,10 @@ const insert = async (req, res) => {
   if (result.message) return res.status(404).json(result);
   res.status(201).json(result);
 };
-module.exports = { getAll, getById, insert };
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const result = await salesServices.deleteById(id);
+  if (result.message) { return res.status(404).json({ message: 'Sale not found' }); }
+  return res.status(204).send();
+};
+module.exports = { getAll, getById, insert, deleteById };
